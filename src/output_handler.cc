@@ -15,14 +15,14 @@ limitations under the License.
 
 #include "output_handler.h"
 #include <Arduino.h>
-#include <M5Stack.h>
+#include <M5StickC.h>
 
 void DrawWing() {
-  int x = 60;
-  int y = 20;
-  int w = 200;
-  int h = 200;
-  int t = 20;
+  int x = 15;
+  int y = 15;
+  int w = 50;
+  int h = 50;
+  int t = 5;
   int k;
   k = (w-t)/4;
   M5.Lcd.fillTriangle(x, y, x+t, y, x + k, y+h, GREEN);
@@ -37,21 +37,21 @@ void DrawWing() {
 }
 
 void DrawRing() {
-  int x = 60;
-  int y = 20;
-  int w = 200;
-  int h = 200;
-  int t = 20;
+  int x = 15;
+  int y = 15;
+  int w = 50;
+  int h = 50;
+  int t = 5;
   M5.Lcd.fillEllipse(x+w/2, y+h/2, w/2, h/2, RED);
   M5.Lcd.fillEllipse(x+w/2, y+h/2, w/2-t, h/2-t, BLACK);
 }
 
 void DrawSlope() {
-  int x = 60;
-  int y = 20;
-  int w = 200;
-  int h = 200;
-  int t = 20;
+  int x = 15;
+  int y = 15;
+  int w = 50;
+  int h = 50;
+  int t = 5;
   M5.Lcd.fillTriangle(x+w-t*1.5, y, x+w, y, x, y+w, BLUE);
   M5.Lcd.fillTriangle(x+w, y, x, y+w, x+t*1.5, y+w, BLUE);
   M5.Lcd.fillRect(x+t, y+h-t, w-t, t, BLUE);

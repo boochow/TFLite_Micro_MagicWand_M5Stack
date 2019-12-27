@@ -18,10 +18,8 @@ limitations under the License.
 #include "constants.h"
 
 #include <Arduino.h>
-#include <M5Stack.h>
-#include "utility/MPU9250.h"
+#include <M5StickC.h>
 
-MPU9250 IMU;
 
 float save_data[600] = {0.0};
 int begin_index = 0;
@@ -29,27 +27,26 @@ bool pending_initial_data = true;
 long last_sample_millis = 0;
 
 TfLiteStatus SetupAccelerometer(tflite::ErrorReporter* error_reporter) {
-  IMU.calibrateMPU9250(IMU.gyroBias, IMU.accelBias);
-  IMU.initMPU9250();
+  M5.MPU6886.Init();
   error_reporter->Report("Magic starts!");
   return kTfLiteOk;
 }
 
 static bool UpdateData() {
   bool new_data = false;
+  float accX = 0;
+  float accY = 0;
+  float accZ = 0;
+
   if ((millis() - last_sample_millis) < 40){
     return false;
   }
   last_sample_millis = millis();
-  IMU.readAccelData(IMU.accelCount);
-  IMU.getAres();
-  IMU.ax = (float)IMU.accelCount[0] * IMU.aRes;
-  IMU.ay = (float)IMU.accelCount[1] * IMU.aRes;
-  IMU.az = (float)IMU.accelCount[2] * IMU.aRes;
-
-  save_data[begin_index++] = 1000 * IMU.az;
-  save_data[begin_index++] = -1000 * IMU.ax;
-  save_data[begin_index++] = -1000 * IMU.ay;
+  M5.MPU6886.getAccelData(&accX,&accY,&accZ);
+  
+  save_data[begin_index++] = 1000 * accX;
+  save_data[begin_index++] = -1000 * accY;
+  save_data[begin_index++] = 1000 * accZ;
 
   if (begin_index >= 600) {
     begin_index = 0;

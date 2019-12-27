@@ -1,4 +1,4 @@
-# TensorFlow Magic Wand demo for M5Stack / M5StickC
+# TensorFlow Magic Wand demo for M5StickC
 
 M5Stack port of [magic wand demo](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/magic_wand). 
 

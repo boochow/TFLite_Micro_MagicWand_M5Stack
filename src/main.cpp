@@ -25,7 +25,7 @@ limitations under the License.
 #include "tensorflow/lite/version.h"
 
 #include <Arduino.h>
-#include <M5Stack.h>
+#include <M5StickC.h>
 
 // Globals, used for compatibility with Arduino-style sketches.
 namespace {
